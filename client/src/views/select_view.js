@@ -7,13 +7,13 @@ class SelectView{
   }
 
   bindEvents() {
-    PubSub.subscribe('InstrumentFamilies:data-ready', (evt) => {
-      const allInstrumentFamilies = evt.detail;
+    PubSub.subscribe('InstrumentFamilies:data-ready', ({detail}) => {
+      const allInstrumentFamilies = detail;
       this.populate(allInstrumentFamilies);
     });
 
-    this.element.addEventListener('change', (evt) => {
-      const selectedIndex = evt.target.value;
+    this.element.addEventListener('change', ({target: {value}}) => {
+      const selectedIndex = value;
       PubSub.publish('SelectView:change', selectedIndex);
     });
   };
